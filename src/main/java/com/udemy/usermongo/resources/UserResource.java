@@ -1,5 +1,6 @@
 package com.udemy.usermongo.resources;
 
+import com.udemy.usermongo.domain.Post;
 import com.udemy.usermongo.domain.User;
 import com.udemy.usermongo.dto.UserDTO;
 import com.udemy.usermongo.services.UserService;
@@ -54,5 +55,9 @@ public class UserResource {
         return ResponseEntity.ok().body(new UserDTO(user));
     }
 
-
+    @GetMapping("/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+        User user = userService.findById(id);
+        return ResponseEntity.ok().body(user.getPosts());
+    }
 }
